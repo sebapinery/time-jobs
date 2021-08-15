@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CitiesRepository } from './cities.repository';
+import { NewCityInputDTO } from './dto/NewCity.dto';
 import { UpdateCityInputDTO } from './dto/UpdateCity.dto';
 import { City } from './schemas/city,schema';
 
@@ -7,25 +8,18 @@ import { City } from './schemas/city,schema';
 export class CitiesService {
   constructor(private readonly citiesRepository: CitiesRepository) {}
 
-  async getCityByName(cityName: string): Promise<City> {
+  async getCityByName(cityName: string): Promise<any> {
     return this.citiesRepository.findOne({ cityName });
   }
 
-  async getCities(): Promise<City[]> {
-    return this.citiesRepository.find({});
+  async createCity(newCity: NewCityInputDTO): Promise<City> {
+    return this.citiesRepository.create({
+      cityName: newCity.cityName,
+      currentTemperature: newCity.currentTemperature,
+    });
   }
 
-  async createCity(
-    cityName: string,
-    currentTemperature: number,
-  ): Promise<City> {
-    return this.citiesRepository.create({ cityName, currentTemperature });
-  }
-
-  async updateCity(
-    cityName: string,
-    cityUpdate: UpdateCityInputDTO,
-  ): Promise<City> {
-    return this.citiesRepository.findOneAndUpdate({ cityName }, cityUpdate);
+  async updateCity(_id: string, cityUpdate: UpdateCityInputDTO): Promise<City> {
+    return this.citiesRepository.findOneAndUpdate({ _id }, cityUpdate);
   }
 }

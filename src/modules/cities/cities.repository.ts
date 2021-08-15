@@ -8,11 +8,7 @@ export class CitiesRepository {
   constructor(@InjectModel(City.name) private cityModel: Model<CityDocument>) {}
 
   async findOne(cityFilterQuery: FilterQuery<City>): Promise<City> {
-    return this.cityModel.findOne(cityFilterQuery);
-  }
-
-  async find(cityFilterQuery: FilterQuery<City>): Promise<City[]> {
-    return this.cityModel.find(cityFilterQuery);
+    return this.cityModel.findOne(cityFilterQuery, {}, { timestamps: true });
   }
 
   async create(city: City): Promise<City> {
@@ -24,6 +20,8 @@ export class CitiesRepository {
     cityFilterQuery: FilterQuery<City>,
     city: Partial<City>,
   ): Promise<City> {
-    return this.cityModel.findByIdAndUpdate(cityFilterQuery, city);
+    return this.cityModel.findByIdAndUpdate(cityFilterQuery, city, {
+      new: true,
+    });
   }
 }

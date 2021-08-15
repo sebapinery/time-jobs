@@ -1,18 +1,40 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CitiesController } from '../cities.controller';
+import { CitiesService } from '../cities.service';
+import { OpenWeatherService } from '../open-weather/open-weather.service';
+import { City } from '../schemas/city,schema';
+import { cityStub } from './stubs/city.stub';
+
+jest.mock('../cities.service');
 
 describe('CitiesController', () => {
-  let controller: CitiesController;
+  let citiesController: CitiesController;
+  let citiesService: CitiesService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CitiesController],
+      providers: [CitiesService, OpenWeatherService],
     }).compile();
 
-    controller = module.get<CitiesController>(CitiesController);
+    citiesController = module.get<CitiesController>(CitiesController);
+    citiesService = module.get<CitiesService>(CitiesService);
+    jest.clearAllMocks();
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+  describe('getCityByName', () => {
+    describe('when getCityByName is called', () => {
+      let city: City;
+
+      beforeEach(async () => {
+        await citiesController.getCityByName(cityStub().cityName);
+      });
+
+      test('then it should call citiesService', () => {
+        expect(citiesService.getCityByName).toHaveBeenCalledWith(
+          cityStub().cityName,
+        );
+      });
+    });
   });
 });

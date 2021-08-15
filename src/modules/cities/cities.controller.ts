@@ -45,21 +45,4 @@ export class CitiesController {
       return cityExistOnDb;
     }
   }
-
-  // @Get()
-  // async getCities(): Promise<City[]> {
-  //   return this.citiesService.getCities();
-  // }
-
-  // @Post()
-  // async createCity(@Body() newCity: NewCityInputDTO): Promise<City> {
-  //   return this.citiesService.createCity(newCity);
-  // }
-  // @Patch()
-  // async updateCity(
-  //   @Query('cityName') cityName: string,
-  //   @Body() updateCity: UpdateCityInputDTO,
-  // ): Promise<City> {
-  //   return this.citiesService.updateCity(cityName, updateCity);
-  // }
 }

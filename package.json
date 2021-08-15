@@ -21,13 +21,14 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nest-middlewares/helmet": "^6.0.0",
+    "@nest-middlewares/response-time": "^6.0.0",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^1.0.1",
     "@nestjs/core": "^8.0.0",
     "@nestjs/mongoose": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.0.2",
-    "@types/mongoose": "^5.11.97",
     "axios": "^0.21.1",
     "dayjs": "^1.10.6",
     "mongodb": "^4.1.0",

@@ -27,13 +27,25 @@ describe('CitiesController', () => {
       let city: City;
 
       beforeEach(async () => {
-        await citiesController.getCityByName(cityStub().cityName);
+        city = await citiesController.getCityByName(cityStub().cityName);
       });
 
       test('then it should call citiesService', () => {
         expect(citiesService.getCityByName).toHaveBeenCalledWith(
           cityStub().cityName,
         );
+      });
+      test('it should return a city', () => {
+        expect(city).toEqual(cityStub());
+      });
+      test('it should return succesfully', () => {
+        expect(citiesService.getCityByName).toHaveReturned();
+      });
+      test('it should return an error', () => {
+        const error = () => {
+          throw new TypeError();
+        };
+        expect(error).toThrow(TypeError);
       });
     });
   });

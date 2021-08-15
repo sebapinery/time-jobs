@@ -16,9 +16,10 @@ export class CitiesController {
 
   @Get()
   async getCityByName(@Query('cityName') cityName: string): Promise<City> {
-    const cityNameNormalized = cityName
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
+    const cityNameNormalized = this.citiesService.normalizeCityName(cityName);
+    // const cityNameNormalized = cityName
+    //   .normalize('NFD')
+    //   .replace(/[\u0300-\u036f]/g, '');
     const cityExistOnDb = await this.citiesService.getCityByName(
       cityNameNormalized,
     );
@@ -31,9 +32,7 @@ export class CitiesController {
         );
 
       const newCity: NewCityInputDTO = {
-        cityName: cityForecastAPI.name
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, ''),
+        cityName: this.citiesService.normalizeCityName(cityForecastAPI.name),
         currentTemperature: cityForecastAPI.main.temp,
       };
 

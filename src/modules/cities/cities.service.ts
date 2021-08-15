@@ -22,4 +22,8 @@ export class CitiesService {
   async updateCity(_id: string, cityUpdate: UpdateCityInputDTO): Promise<City> {
     return this.citiesRepository.findOneAndUpdate({ _id }, cityUpdate);
   }
+
+  normalizeCityName(cityName: string): string {
+    return cityName.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
 }

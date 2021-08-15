@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CitiesController } from '../cities.controller';
 import { CitiesService } from '../cities.service';
 import { OpenWeatherService } from '../open-weather/open-weather.service';
-import { City } from '../schemas/city,schema';
+import { City } from '../schemas/city.schema';
 import { cityStub } from './stubs/city.stub';
 
 jest.mock('../cities.service');

@@ -1,4 +1,4 @@
-import { City } from '../../schemas/city,schema';
+import { City } from '../../schemas/city.schema';
 
 export const cityStub = (): City => {
   return {

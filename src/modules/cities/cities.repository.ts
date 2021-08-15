@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model } from 'mongoose';
-import { City, CityDocument } from './schemas/city,schema';
+import { City, CityDocument } from './schemas/city.schema';
 
 @Injectable()
 export class CitiesRepository {

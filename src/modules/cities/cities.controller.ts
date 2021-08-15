@@ -4,7 +4,7 @@ import { CitiesService } from './cities.service';
 import { NewCityInputDTO } from './dto/NewCity.dto';
 import { UpdateCityInputDTO } from './dto/UpdateCity.dto';
 import { OpenWeatherService } from './open-weather/open-weather.service';
-import { City } from './schemas/city,schema';
+import { City } from './schemas/city.schema';
 import * as dayjs from 'dayjs';
 
 @Controller('cities')
@@ -16,15 +16,24 @@ export class CitiesController {
 
   @Get()
   async getCityByName(@Query('cityName') cityName: string): Promise<City> {
-    const cityExistOnDb = await this.citiesService.getCityByName(cityName);
+    const cityNameNormalized = cityName
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+    const cityExistOnDb = await this.citiesService.getCityByName(
+      cityNameNormalized,
+    );
     const now = dayjs();
 
     if (!cityExistOnDb) {
       const cityForecastAPI =
-        await this.openWheatherService.getForecastByCityName(cityName);
+        await this.openWheatherService.getForecastByCityName(
+          cityNameNormalized,
+        );
 
       const newCity: NewCityInputDTO = {
-        cityName: cityForecastAPI.name,
+        cityName: cityForecastAPI.name
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, ''),
         currentTemperature: cityForecastAPI.main.temp,
       };
 
@@ -32,7 +41,9 @@ export class CitiesController {
       return newCityCreated;
     } else if (dayjs(cityExistOnDb.updatedAt).diff(now, 'minutes') < -10) {
       const cityForecastAPI =
-        await this.openWheatherService.getForecastByCityName(cityName);
+        await this.openWheatherService.getForecastByCityName(
+          cityNameNormalized,
+        );
 
       const temperatureUpdate: UpdateCityInputDTO = {
         currentTemperature: cityForecastAPI.main.temp,

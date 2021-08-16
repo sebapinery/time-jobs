@@ -4,13 +4,7 @@ import { CitiesRepository } from '../cities.repository';
 import { NewCityInputDTO } from '../dto/NewCity.dto';
 import { City } from '../schemas/city.schema';
 import { cityStub } from './stubs/city.stub';
-
-class CityModel {
-  constructor(private data) {}
-  save = jest.fn().mockReturnValue(this.data);
-  static findOne = jest.fn().mockReturnValue(cityStub());
-  static create = jest.fn().mockReturnValue(cityStub());
-}
+import { CityModelMock } from '../__mocks__/city.model';
 
 describe('CityRepository', () => {
   let citiesRepository: CitiesRepository;
@@ -21,7 +15,7 @@ describe('CityRepository', () => {
         CitiesRepository,
         {
           provide: getModelToken('City'),
-          useValue: CityModel,
+          useValue: CityModelMock,
         },
       ],
     }).compile();

@@ -6,12 +6,12 @@ import { CitiesRepository } from '../cities.repository';
 import { cityStub } from './stubs/city.stub';
 import { CityModel } from './support/city.model';
 
-describe('UsersRepository', () => {
+describe('citysRepository', () => {
   let citiesRepository: CitiesRepository;
 
   describe('find operations', () => {
     let cityModel: CityModel;
-    let userFilterQuery: FilterQuery<City>;
+    let cityFilterQuery: FilterQuery<City>;
 
     beforeEach(async () => {
       const moduleRef = await Test.createTestingModule({
@@ -27,7 +27,7 @@ describe('UsersRepository', () => {
       citiesRepository = moduleRef.get<CitiesRepository>(CitiesRepository);
       cityModel = moduleRef.get<CityModel>(getModelToken(City.name));
 
-      userFilterQuery = {
+      cityFilterQuery = {
         cityName: cityStub().cityName,
       };
 
@@ -40,14 +40,14 @@ describe('UsersRepository', () => {
 
         beforeEach(async () => {
           jest.spyOn(cityModel, 'findOne');
-          city = await citiesRepository.findOne(userFilterQuery);
+          city = await citiesRepository.findOne(cityFilterQuery);
         });
 
-        test('then it should call the userModel', () => {
-          expect(cityModel.findOne).toHaveBeenCalledWith(userFilterQuery, {});
+        test('then it should call the cityModel', () => {
+          expect(cityModel.findOne).toHaveBeenCalledWith(cityFilterQuery, {});
         });
 
-        test('then it should return a user', () => {
+        test('then it should return a city', () => {
           expect(city).toEqual(cityStub());
         });
       });
@@ -60,20 +60,20 @@ describe('UsersRepository', () => {
         beforeEach(async () => {
           jest.spyOn(cityModel, 'findOneAndUpdate');
           city = await citiesRepository.findOneAndUpdate(
-            userFilterQuery,
+            cityFilterQuery,
             cityStub(),
           );
         });
 
-        test('then it should call the userModel', () => {
+        test('then it should call the cityModel', () => {
           expect(cityModel.findOneAndUpdate).toHaveBeenCalledWith(
-            userFilterQuery,
+            cityFilterQuery,
             cityStub(),
             { new: true },
           );
         });
 
-        test('then it should return a user', () => {
+        test('then it should return a city', () => {
           expect(city).toEqual(cityStub());
         });
       });
@@ -107,12 +107,12 @@ describe('UsersRepository', () => {
           city = await citiesRepository.create(cityStub());
         });
 
-        test('then it should call the userModel', () => {
+        test('then it should call the cityModel', () => {
           expect(saveSpy).toHaveBeenCalled();
           expect(constructorSpy).toHaveBeenCalledWith(cityStub());
         });
 
-        test('then it should return a user', () => {
+        test('then it should return a city', () => {
           expect(city).toEqual(cityStub());
         });
       });

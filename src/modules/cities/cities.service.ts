@@ -24,6 +24,12 @@ export class CitiesService {
   }
 
   normalizeCityName(cityName: string): string {
-    return cityName.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    return cityName
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 }

@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "b0a67fc1-457b-4199-b228-204f6aee12f2",
+		"name": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get forecast by city name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_ROUTE}}/cities?cityName=Cordoba",
+					"host": [
+						"{{API_ROUTE}}"
+					],
+					"path": [
+						"cities"
+					],
+					"query": [
+						{
+							"key": "cityName",
+							"value": "Cordoba"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_ROUTE",
+			"value": "http://localhost:3000"
+		}
+	]
+}

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+// import { AppController } from './app.controller';
+// import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CitiesModule } from './modules/cities/cities.module';
 
@@ -15,7 +15,7 @@ import { CitiesModule } from './modules/cities/cities.module';
     ),
     CitiesModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

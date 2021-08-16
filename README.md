@@ -58,3 +58,21 @@ http://localhost:3000/cities?cityName="Cordoba"
     "__v": 0
 }
 ```
+## Swagger
+
+```bash
+# Swagger documentation will be running on
+http://localhost:3000/api/docs/
+```
+
+
+## Read the entire documentation with Comopodoc
+```bash
+# Install compodoc globally.
+$ npm install -g @compodoc/compodoc
+
+# Start compodoc
+$ compodoc -p tsconfig.json -s
+
+# The documentation will be on http://localhost:8080
+```

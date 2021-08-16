@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import axios from 'axios';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class OpenWeatherService {
         { headers: { 'Content-Type': 'application/json' } },
       )
       .catch((err) => {
-        throw new HttpException('City not found', 404);
+        throw new HttpException('City not found', HttpStatus.NOT_FOUND);
       });
 
     return data;

@@ -1,7 +1,6 @@
 import { Get } from '@nestjs/common';
 import { Controller, Query } from '@nestjs/common';
 import { CitiesService } from './cities.service';
-import { NewCityInputDTO } from './dto/NewCity.dto';
 import { UpdateCityInputDTO } from './dto/UpdateCity.dto';
 import { OpenWeatherService } from './open-weather/open-weather.service';
 import { City } from './schemas/city.schema';
@@ -29,12 +28,10 @@ export class CitiesController {
         cityNameNormalized,
       );
 
-      const newCity: NewCityInputDTO = {
+      const newCityCreated = await this.citiesService.createCity({
         cityName: this.citiesService.normalizeCityName(name),
         currentTemperature: temp,
-      };
-
-      const newCityCreated = await this.citiesService.createCity(newCity);
+      });
       return newCityCreated;
     } else if (dayjs(cityExistOnDb.updatedAt).diff(dayjs(), 'minutes') <= -10) {
       const {

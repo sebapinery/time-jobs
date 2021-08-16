@@ -18,9 +18,9 @@ export class CitiesRepository {
 
   async findOneAndUpdate(
     cityFilterQuery: FilterQuery<City>,
-    city: Partial<City>,
+    updatesToDo: Partial<City>,
   ): Promise<City> {
-    return this.cityModel.findByIdAndUpdate(cityFilterQuery, city, {
+    return this.cityModel.findByIdAndUpdate(cityFilterQuery, updatesToDo, {
       new: true,
     });
   }

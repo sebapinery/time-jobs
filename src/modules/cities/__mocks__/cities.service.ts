@@ -4,4 +4,5 @@ export const CitiesService = jest.fn().mockReturnValue({
   getCityByName: jest.fn().mockReturnValue(cityStub()),
   createCity: jest.fn().mockReturnValue(cityStub()),
   updateCity: jest.fn().mockReturnValue(cityStub()),
+  normalizeCityName: jest.fn().mockReturnValue(cityStub().cityName),
 });

@@ -19,8 +19,14 @@ export class CitiesService {
     });
   }
 
-  async updateCity(_id: string, cityUpdate: UpdateCityInputDTO): Promise<City> {
-    return this.citiesRepository.findOneAndUpdate({ _id }, cityUpdate);
+  async updateCity(
+    _id: string,
+    newTemperatureMessure: UpdateCityInputDTO,
+  ): Promise<City> {
+    return this.citiesRepository.findOneAndUpdate(
+      { _id },
+      newTemperatureMessure,
+    );
   }
 
   normalizeCityName(cityName: string): string {

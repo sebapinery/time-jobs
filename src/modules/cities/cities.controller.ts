@@ -22,26 +22,29 @@ export class CitiesController {
     );
 
     if (!cityExistOnDb) {
-      const cityForecastAPI =
-        await this.openWheatherService.getForecastByCityName(
-          cityNameNormalized,
-        );
+      const {
+        name,
+        main: { temp },
+      } = await this.openWheatherService.getForecastByCityName(
+        cityNameNormalized,
+      );
 
       const newCity: NewCityInputDTO = {
-        cityName: this.citiesService.normalizeCityName(cityForecastAPI.name),
-        currentTemperature: cityForecastAPI.main.temp,
+        cityName: this.citiesService.normalizeCityName(name),
+        currentTemperature: temp,
       };
 
       const newCityCreated = await this.citiesService.createCity(newCity);
       return newCityCreated;
-    } else if (dayjs(cityExistOnDb.updatedAt).diff(dayjs(), 'minutes') < -10) {
-      const cityForecastAPI =
-        await this.openWheatherService.getForecastByCityName(
-          cityNameNormalized,
-        );
+    } else if (dayjs(cityExistOnDb.updatedAt).diff(dayjs(), 'minutes') <= -10) {
+      const {
+        main: { temp },
+      } = await this.openWheatherService.getForecastByCityName(
+        cityNameNormalized,
+      );
 
       const temperatureUpdate: UpdateCityInputDTO = {
-        currentTemperature: cityForecastAPI.main.temp,
+        currentTemperature: temp,
       };
       return await this.citiesService.updateCity(
         cityExistOnDb._id,

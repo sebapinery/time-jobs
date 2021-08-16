@@ -10,7 +10,7 @@ export class OpenWeatherService {
         `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`,
         { headers: { 'Content-Type': 'application/json' } },
       )
-      .catch((err) => {
+      .catch(() => {
         throw new HttpException('City not found', HttpStatus.NOT_FOUND);
       });
 

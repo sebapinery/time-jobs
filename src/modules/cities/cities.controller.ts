@@ -17,13 +17,9 @@ export class CitiesController {
   @Get()
   async getCityByName(@Query('cityName') cityName: string): Promise<City> {
     const cityNameNormalized = this.citiesService.normalizeCityName(cityName);
-    // const cityNameNormalized = cityName
-    //   .normalize('NFD')
-    //   .replace(/[\u0300-\u036f]/g, '');
     const cityExistOnDb = await this.citiesService.getCityByName(
       cityNameNormalized,
     );
-    const now = dayjs();
 
     if (!cityExistOnDb) {
       const cityForecastAPI =
@@ -38,7 +34,7 @@ export class CitiesController {
 
       const newCityCreated = await this.citiesService.createCity(newCity);
       return newCityCreated;
-    } else if (dayjs(cityExistOnDb.updatedAt).diff(now, 'minutes') < -10) {
+    } else if (dayjs(cityExistOnDb.updatedAt).diff(dayjs(), 'minutes') < -10) {
       const cityForecastAPI =
         await this.openWheatherService.getForecastByCityName(
           cityNameNormalized,

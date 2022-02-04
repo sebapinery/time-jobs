@@ -27,7 +27,7 @@ jobs:
     container: 
       image: node:10.16-jessie
       volumes:
-        - ./:./
+        - .:.
     steps:
       - run: |
           chmod +x ./${pwd}/scripts/run.sh

@@ -27,7 +27,8 @@ jobs:
     container: node:10.16-jessie
     steps:
       - run: |
-          printenv
+          cd ${home}
+          sh ls
         name: Run in container
           # chmod +x /__w/time-jobs/time-jobs/scripts/run.sh
           # ./scripts/run.sh

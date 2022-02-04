@@ -24,11 +24,14 @@ jobs:
   #       name: Run on VM
   container:
     runs-on: ubuntu-latest
-    container: node:10.16-jessie
+    container: 
+      image: node:10.16-jessie
+      volumes:
+        - ./:./
     steps:
       - run: |
-          cd ${home}
-          sh ls
+          chmod +x ./${pwd}/scripts/run.sh
+          ./${pwd}/scripts/run.sh
         name: Run in container
           # chmod +x /__w/time-jobs/time-jobs/scripts/run.sh
           # ./scripts/run.sh

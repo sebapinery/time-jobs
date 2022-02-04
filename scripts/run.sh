@@ -3,6 +3,6 @@ set -ex
 
 sudo apt-get update -y
 
-sudo apt-intstall git -y
+sudo apt-get intstall git -y
 
 echo "Git installed"

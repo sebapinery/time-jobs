@@ -1,4 +1,8 @@
 #!/bin/sh
 set -ex
 
-echo "Hola desde Bash"
+apt-get update -y && apt-get upgrade -y
+
+apt-intstall git -y
+
+echo "Git installed"

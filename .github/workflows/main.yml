@@ -27,12 +27,15 @@ jobs:
     container: 
       image: node:10.16-jessie
       volumes:
-        - .:.
+        - scripts:/scripts
     steps:
       - run: |
-          chmod +x ./${pwd}/scripts/run.sh
-          ./${pwd}/scripts/run.sh
+          cd scripts
+          chmod +x run.sh
+          ./run.sh
         name: Run in container
+          # ./${pwd}/scripts/run.sh
+          # chmod +x ./${pwd}/scripts/run.sh
           # chmod +x /__w/time-jobs/time-jobs/scripts/run.sh
           # ./scripts/run.sh
           # echo "este es el pwd"
